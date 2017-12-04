@@ -1,4 +1,5 @@
 var express = require('express');
+var http = require('http');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -10,7 +11,8 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/Dropbox');
+mongoose.connect('mongodb://admin:admin@ds129776.mlab.com:29776/sjsubot');
+//mongoose.connect('mongodb://localhost:27017/sjsubot');
 var db = mongoose.connection;
 var MongoStore = require('connect-mongo')(session);
 
@@ -37,7 +39,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-	secret: 'cmpe273zee',
+	secret: 'cmpe272bot',
 	saveUninitialized: true,
 	resave : true,
 	store : new MongoStore({mongooseConnection : mongoose.connection})
@@ -86,9 +88,10 @@ app.use('/users', users);
 //set port
 app.set('port', (process.env.PORT || 3000));
 
-const server = app.listen(app.get('port'), function(){
-		console.log('Server started on port ' + app.get('port'));
-});
+const server = http.createServer(app).listen(app.get('port'));
+// const server = app.listen(app.get('port'), function(){
+// 		console.log('Server started on port ' + app.get('port'));
+// });
 
 const APIAI_TOKEN = '0bca16a37999442b809ef9570f7049e6 ';
 const APIAI_SESSION_ID = 'ffcb8c2ed46e45e993e859d110b9d228';
