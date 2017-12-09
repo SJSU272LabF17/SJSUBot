@@ -18,5 +18,5 @@ Socket.io
 Handlebars
 Bootstrap
 
-SJSUBot app is deployed to Heroku. https://sjsubot.herokuapp.com/
+### SJSUBot app is deployed to Heroku. https://sjsubot.herokuapp.com/
 
