@@ -8,15 +8,15 @@ An  AI  powered  chatbot  is  spawned  inside  the  website  when  prospective s
 
 ### Technologies used:
 
-api.ai (DialogFlow)
-REST Framework
-node.js
-express
-MongoDB
-Heroku
-Socket.io
-Handlebars
-Bootstrap
+- api.ai (DialogFlow)
+- REST Framework
+- node.js
+- express
+- MongoDB
+- Heroku
+- Socket.io
+- Handlebars
+- Bootstrap
 
 ### SJSUBot app is deployed to Heroku. https://sjsubot.herokuapp.com/
 
