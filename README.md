@@ -22,4 +22,4 @@ An  AI  powered  chatbot  is  spawned  inside  the  website  when  prospective s
 
 Screenshot of the Bot
 
-![ScreenShot](https://github.com/SJSU272LabF17/Project-Team-3/blob/master/Screenshot%20Bot.png}/{Project-Team-3})
+![image](https://github.com/SJSU272LabF17/Project-Team-3/blob/master/Screenshot%20Bot.png)
