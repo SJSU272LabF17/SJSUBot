@@ -30,13 +30,13 @@
       color: #303030;
       font-weight: 400;
       margin-bottom: 30px;
-  }  
+  }
   .container-fluid {
       padding: 60px 50px;
       background: #fff url(images/geometry.png) repeat;
   }
   .bg-grey {
-      background-color: #f6f6f6; 
+      background-color: #f6f6f6;
   }
   .logo-small {
       color: #f4511e;
@@ -77,7 +77,7 @@
       font-style: normal;
   }
   .panel {
-      border: 1px solid #f4511e; 
+      border: 1px solid #f4511e;
       border-radius:0 !important;
       transition: box-shadow 0.5s;
   }
@@ -153,7 +153,7 @@
     0% {
       opacity: 0;
       transform: translateY(70%);
-    } 
+    }
     100% {
       opacity: 1;
       transform: translateY(0%);
@@ -163,7 +163,7 @@
     0% {
       opacity: 0;
       -webkit-transform: translateY(70%);
-    } 
+    }
     100% {
       opacity: 1;
       -webkit-transform: translateY(0%);
@@ -194,7 +194,7 @@
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
+        <span class="icon-bar"></span>
       </button><div class ="navbar-brand" style = "width: 150%"><a href="#myPage">SJSUBOT<img src="/images/sjsu-32x32.png"/></a></div>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -203,7 +203,7 @@
         <li><a href="#currentstudents">CURRENT STUDENTS</a></li>
         <li><a href="#futurestudents">FUTURE STUDENTS</a></li>
         <li><a href="#contact">CONTACT</a></li>
-        <li><a href="/users/register">ADMIN</a></li>
+        <li><a href="/adminlogin">ADMIN</a></li>
       </ul>
     </div>
   </div>
@@ -319,9 +319,16 @@
 <script>
 function myMap() {
 var myCenter = new google.maps.LatLng(37.335465, -121.881066);
-var mapProp = {center:myCenter, zoom:12, scrollwheel:false, draggable:false, mapTypeId:google.maps.MapTypeId.ROADMAP};
+var mapProp = {center:myCenter, zoom:16, scrollwheel:false, draggable:false, mapTypeId:google.maps.MapTypeId.ROADMAP};
 var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
 var marker = new google.maps.Marker({position:myCenter});
+var contentString = '<h3>San Jose State University</h3>';
+  var infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+  marker.addListener('click', function() {
+    infowindow.open(map, marker);
+  });
 marker.setMap(map);
 }
 </script>
@@ -351,13 +358,13 @@ $(document).ready(function(){
       $('html, body').animate({
         scrollTop: $(hash).offset().top
       }, 900, function(){
-   
+
         // Add hash (#) to URL when done scrolling (default click behavior)
         window.location.hash = hash;
       });
     } // End if
   });
-  
+
   $(window).scroll(function() {
     $(".slideanim").each(function(){
       var pos = $(this).offset().top;

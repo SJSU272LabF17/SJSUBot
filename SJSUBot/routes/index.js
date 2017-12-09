@@ -32,4 +32,13 @@ function ensureAuthenticated(req, res, next){
 	// }
 }
 
+// Adminlogin
+router.get('/adminlogin', function(req, res){
+	console.log("Getting admin");
+	res.render('adminlogin', {layout :'other'});
+});
+
+
+
+
 module.exports = router;

@@ -15,7 +15,7 @@ router.get('/login', function(req, res){
 	}
 });
 
-// Bot page / index 
+// Bot page / index
 router.get('/index', function(req, res){
 	res.render('index');
 });
@@ -24,6 +24,34 @@ router.get('/index', function(req, res){
 router.get('/register', function(req, res){
 	res.render('register', {layout :'other'});
 });
+
+// Adminlogin
+router.get('/adminlogin', function(req, res){
+	console.log("Getting admin");
+	res.render('adminlogin', {layout :'other'});
+});
+
+// AdminloginPost
+router.post('/adminlogin', function(req, res){
+	console.log("Posting to admin");
+	var username = req.body.username;
+	var password = req.body.password;
+	if(username == "admin@sjsu.edu"){
+		console.log("Valid admin credentials");
+			res.render('register', {layout :'other'});
+	}
+
+	else
+		{
+			console.log("Invalid admin credentials");
+			req.flash('error_msg', 'Invalid Admin credentials');
+			//res.render('adminlogin', {layout :'other'});
+			res.redirect('adminlogin');
+		}
+
+});
+
+
 
 // Register User
 router.post('/register', function(req, res){
@@ -37,7 +65,7 @@ router.post('/register', function(req, res){
 	var due_assignments = req.body.due_assignments;
 	var due_fees = req.body.due_fees;
 	var gpa = req.body.gpa;
-	var upcoming_quizes = req.body.upcoming_quizes;
+	var upcoming_quizzes = req.body.upcoming_quizzes;
 
 	// Validation
 	req.checkBody('name', 'Name is required').notEmpty();
@@ -53,7 +81,7 @@ router.post('/register', function(req, res){
 		});
 	} else {
 		var newUser = new User({
-			name: name,	
+			name: name,
 			email:email,
 			password: password,
 			student_id : student_id,
@@ -63,7 +91,7 @@ router.post('/register', function(req, res){
 			due_assignments : due_assignments,
 			due_fees : due_fees,
 			gpa : gpa,
-			upcoming_quizes : upcoming_quizes
+			upcoming_quizzes : upcoming_quizzes
 		});
 
 		User.createUser(newUser, function(err, user){
@@ -98,7 +126,7 @@ passport.use(new LocalStrategy(
   }));
 
 passport.serializeUser(function(user, done) {
-  done(null, user.id);
+  done(null, user);
 });
 
 passport.deserializeUser(function(id, done) {
@@ -115,8 +143,9 @@ router.post('/login', passport.authenticate('local', {successRedirect:'index', f
 
 router.get('/logout', function(req, res){
 	req.logout();
+	req.session.destroy();
 
-	req.flash('success_msg', 'You are logged out');
+
 
 	res.redirect('/users/login');
 });

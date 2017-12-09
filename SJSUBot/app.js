@@ -18,6 +18,7 @@ var MongoStore = require('connect-mongo')(session);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var User = require('./models/user');
 
 //Init App
 var app = express();
@@ -40,6 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
 	secret: 'cmpe272bot',
+	cookie: { maxAge : 3600000 } ,
 	saveUninitialized: true,
 	resave : true,
 	store : new MongoStore({mongooseConnection : mongoose.connection})
@@ -72,6 +74,7 @@ app.use(expressValidator({
 app.use(flash());
 
 //Global variables
+var emailUser = null;
 app.use(function(req, res, next){
 	res.locals.success_msg = req.flash('success_msg');
 	res.locals.error_msg = req.flash('error_msg');
@@ -79,6 +82,18 @@ app.use(function(req, res, next){
 	res.locals.error = req.flash('error');
 	//to access user from anywhere
 	res.locals.user = req.user || null;
+	if(req.session) {
+	if(req.session.passport){
+	emailUser = req.session.passport.user.email;
+	console.log("User logged in is" + emailUser);
+}
+else {
+	emailUser = "admin@sjsu.edu"
+}
+}
+else {
+emailUser = "admin@sjsu.edu";
+}
 	next();
 });
 
@@ -115,41 +130,41 @@ io.on('connection', function(socket) {
 
     apiaiReq.on('response', (response) => {
       var aiText = response.result.fulfillment.speech;
-      var gpa = 3.5;
-      var feesDue = '$6431.5';
-      var upcomingQuizzes = 'Quiz on Distributed Systems on coming Friday';
-      var dueAssignments = 'Assignment on Distributed Systems due coming Friday';
-      var creditEarned = '16 credits';
-      var creditsRemaining = 24;
-      var coursesCompleted = 'Distributed Systems, Enterprise Overview , Database Systems';
-      var coursesRemaining = 'Cloud, Operating Systems , Fayad';
-      // console.log("response json:" + JSON.stringify(response));
+
       var intent = response.result.metadata.intentName;
-  //    console.log("intent name:" + intent);
+      console.log("intent name:" + intent);
+			console.log("fetching username", emailUser);
 
-      if(intent === 'gpa')
-        aiText = response.result.fulfillment.speech + gpa;
-      if(intent === 'feesDue')
-        aiText = response.result.fulfillment.speech + feesDue;
-      if(intent === 'upcomingQuizzes')
-        aiText = response.result.fulfillment.speech + upcomingQuizzes;
-      if(intent === 'dueAssignments')
-        aiText = response.result.fulfillment.speech + dueAssignments;
-      if(intent === 'creditEarned')
-        aiText = response.result.fulfillment.speech + creditEarned;
-      if(intent === 'creditsRemaining')
-        aiText = response.result.fulfillment.speech + creditsRemaining;
-      if(intent === 'coursesCompleted')
-        aiText = response.result.fulfillment.speech + coursesCompleted;
-      if(intent === 'coursesRemaining')
-        aiText = response.result.fulfillment.speech + coursesRemaining;
+			User.getStudentByEmail(emailUser, intent, function(err, user){
+				if(intent === 'gpa')
+				aiText = response.result.fulfillment.speech + " " + user.gpa;
+			 if(intent === 'feesDue')
+				 aiText = response.result.fulfillment.speech + " " + user.due_fees;
+			if(intent === 'upcomingQuizzes')
+				aiText = response.result.fulfillment.speech + " " + user.upcoming_quizzes;
+				if(intent === 'dueAssignments')
+				aiText = response.result.fulfillment.speech + " " + user.due_assignments;
+			if(intent === 'creditEarned')
+				aiText = response.result.fulfillment.speech + " " + user.credits;
+			 if(intent === 'creditsRemaining')
+				aiText = response.result.fulfillment.speech + " " + user.credits_remaining;
+			if(intent === 'coursesCompleted')
+				aiText = response.result.fulfillment.speech + " " + user.courses_completed;
+			if(intent === 'coursesRemaining')
+				aiText = response.result.fulfillment.speech + " " + user.courses_remaining;
 
-    //  console.log("aiText is :" +  aiText);
+			if(err) throw err;
+			if(!user){
+				return done(null, false, {message: 'Unknown User'});
+				}
 
-      console.log('Bot reply: ' + aiText);
-      socket.emit('bot reply', aiText);
-    });
+			console.log("aiText is :" +  aiText);
 
+			console.log('Bot reply: ' + aiText);
+			socket.emit('bot reply', aiText);
+		});
+
+	});
     apiaiReq.on('error', (error) => {
       console.log(error);
     });
