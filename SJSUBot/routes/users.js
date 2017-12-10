@@ -9,7 +9,7 @@ var User = require('../models/user');
 // Login
 router.get('/login', function(req, res){
 	if(req.isAuthenticated()){
-		res.render('index');
+		res.render('index',{layout :'botpage'});
 	} else {
 		res.render('login');
 	}
@@ -17,7 +17,7 @@ router.get('/login', function(req, res){
 
 // Bot page / index
 router.get('/index', function(req, res){
-	res.render('index');
+	res.render('index', {layout :'botpage'});
 });
 
 // Register
@@ -144,9 +144,6 @@ router.post('/login', passport.authenticate('local', {successRedirect:'index', f
 router.get('/logout', function(req, res){
 	req.logout();
 	req.session.destroy();
-
-
-
 	res.redirect('/users/login');
 });
 

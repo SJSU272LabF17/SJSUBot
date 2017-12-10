@@ -116,7 +116,7 @@
   }
   .navbar {
       margin-bottom: 0;
-      background-color: #9ca3a3;
+      background-color: #09344f;
       z-index: 9999;
       border: 0;
       font-size: 12px !important;
@@ -130,7 +130,7 @@
   }
   .navbar-nav li a:hover, .navbar-nav li.active a {
       color: #427ed1 !important;
-      background-color: #fff !important;
+      background-color: #dcdfe5 !important;
   }
   .navbar-default .navbar-toggle {
       border-color: transparent;
@@ -195,7 +195,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </button><div class ="navbar-brand" style = "width: 150%"><a href="#myPage">SJSUBOT<img src="/images/sjsu-32x32.png"/></a></div>
+      </button><div class ="navbar-brand" style = "width: 150%;"><a href="#myPage" style =" color: #fff;">SJSUBOT<img src="/images/sjsu-32x32.png"/></a></div>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
@@ -214,17 +214,17 @@
   <div class="row">
     <div class="col-sm-8">
       <h2>About SJSU Bot</h2><br>
-      <h4>SJSUBot is a friendly bot which will help you in answering your questions about SJSU.</h4>
+      <h4>SJSUBot is a friendly bot which will help you answering your questions about SJSU. This website provides you the information and resources that helps improving your learning experience with SJSU. Talk to our bot to know more.</h4>
     </div>
     <div class="col-sm-4">
-      <span style ="margin-left: 50px"><div class="user-photo"><img src="images/bot1.jpg"></div></span>
+      <span style ="margin-left: 20%"><img src="images/bot-icon.png"></span>
     </div>
   </div>
 </div>
 
 <!-- Container (Portfolio Section) -->
-<div class="container-fluid text-center bg-grey">
-  <h2>Discover SJSU</h2>
+<div class="container-fluid text-center bg-grey" style ="margin-top: -1%">
+  <h2 style ="margin-top: -2%">Discover SJSU</h2>
   <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -234,15 +234,24 @@
     </ol>
 
     <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
+    <div class="carousel-inner" role="listbox" >
       <div class="item active">
-         <img src="images/tower.jpg" style="width:100%; height: 700px;">
+         <img src="images/tower.jpg" style="width:80%; height: 600px; margin: auto;">
+         <div class="carousel-caption">
+            <h1>Tower Lawn</h1>
+        </div>
       </div>
       <div class="item">
-        <img src="images/statue.jpg" style="width:100%; height: 700px;">
+        <img src="images/statue.jpg" style="width:80%; height: 600px; margin: auto;">
+        <div class="carousel-caption">
+            <h1>Tommie Smith John Carlos Statue</h1>
+        </div>
       </div>
       <div class="item">
-        <img src="images/theatre.jpg" style="width:100%; height: 700px;">
+        <img src="images/theatre.jpg" style="width:80%; height: 600px; margin: auto;">
+        <div class="carousel-caption">
+            <h1>Theatre</h1>
+        </div>
       </div>
     </div>
 
@@ -258,27 +267,27 @@
   </div>
 </div>
 
-<div id="currentstudents" class="container-fluid">
+<div id="currentstudents" class="container-fluid" style ="margin-top: -1%">
   <div class="row">
     <div class="col-sm-4">
-      <img src="images/sjsulogo.png"/>
+      <img src="images/graduation1.png"/>
     </div>
     <div class="col-sm-8">
       <h2>Current Students</h2><br>
-        <h4> If you have questions regarding your grades, course and Assignments.</h4><br>
+        <h4> Check out the below link to know your grades, GPA, course and Assignments. Login into SJSUBot account with your Student email id and Password. Happy Holidays !!! </h4><br>
       <h4><strong><a href = "/users/login">Click here</a> to talk to SJSUBot</strong></h4>
     </div>
   </div>
 </div>
 
-<div id="futurestudents" class="container-fluid">
+<div id="futurestudents" class="container-fluid" style ="margin-top: -5%; margin-bottom: -3%">
   <div class="row">
     <div class="col-sm-4">
-      <img src="images/sjsulogo.png"/>
+      <img src="images/university.png"/>
     </div>
     <div class="col-sm-8">
       <h2>Future Students</h2><br>
-      <h4> We appreciate your interest in considering San José State University. We are glad to help you find answers for the questions you may have about the Graduate Programs and Requirements.</h4><br>
+      <h4> Are you finding yourself struggling to find the information about SJSU? You are not alone. Check out the below link to find answers for the questions you may have about the Graduate Programs and Requirements.</h4><br>
       <h4><strong><a href="/bot">Click here</a> to talk to SJSUBot</strong></h4>
     </div>
   </div>
@@ -294,6 +303,7 @@
       <p><span class="glyphicon glyphicon-phone"></span> 408-924-1000</p>
       <p><span class="glyphicon glyphicon-envelope"></span> bursar@sjsu.edu </p>
     </div>
+     <form id="forminfo">
     <div class="col-sm-7 slideanim">
       <div class="row">
         <div class="col-sm-6 form-group">
@@ -306,10 +316,11 @@
       <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
       <div class="row">
         <div class="col-sm-12 form-group">
-          <button class="btn btn-default pull-right" type="submit">Send</button>
+          <button class="btn btn-default pull-right" id ="send" value = "click" type="submit">Send</button>
         </div>
       </div>
     </div>
+    </form>
   </div>
 </div>
 
@@ -375,7 +386,14 @@ $(document).ready(function(){
         }
     });
   });
-})
+
+  $('#send').click(function() {
+      $('#forminfo').attr('action',
+                     'mailto:bursar@sjsu.edu?subject=' +
+                     $('#name').val() + $('#email').val() + '&body=' + $('#comments').val());
+      $('#forminfo').submit();
+  });
+});
 </script>
 
 </body>

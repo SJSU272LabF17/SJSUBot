@@ -19,8 +19,7 @@ router.get('/', function(req, res){
 });
 
 router.get('/bot', function(req, res){
-
-	res.render('bot', {layout: 'other'});
+	res.render('bot', {layout: 'botpage'});
 });
 
 function ensureAuthenticated(req, res, next){
@@ -37,8 +36,5 @@ router.get('/adminlogin', function(req, res){
 	console.log("Getting admin");
 	res.render('adminlogin', {layout :'other'});
 });
-
-
-
 
 module.exports = router;

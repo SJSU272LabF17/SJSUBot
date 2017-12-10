@@ -33,7 +33,7 @@ recognition.addEventListener('result', (e) => {
   if (e.results[0].isFinal) {
     const divHuman = document.createElement('div');
     divHuman.className = "chat friend";
-    divHuman.innerHTML = `<img src=\'/images/human1.jpg\'><p class=\'chat-message\'>${textResult}</p>`;
+    divHuman.innerHTML = `<img src=\'/images/user.png\'><p class=\'chat-message\'>${textResult}</p>`;
     chatLogs.appendChild(divHuman); }
 
  // outputYou.textContent = text;
@@ -45,7 +45,7 @@ recognition.addEventListener('result', (e) => {
 function send(text) {
   const divHuman = document.createElement('div');
     divHuman.className = "chat friend";
-    divHuman.innerHTML = `<img src=\'/images/human1.jpg\'><p class=\'chat-message\'>${text}</p>`;
+    divHuman.innerHTML = `<img src=\'/images/user.png\'><p class=\'chat-message\'>${text}</p>`;
     chatLogs.appendChild(divHuman);
   socket.emit('chat message', text);
 }
@@ -81,7 +81,7 @@ socket.on('bot reply', function(replyText) {
   para.innerHTML = `${replyText}`;
 
   const srcImg = document.createElement('img');
-  srcImg.src = "/images/bot1.jpg";
+  srcImg.src = "/images/bot-icon.png";
 
   const divUserPhotoContainer = document.createElement('div');
   divUserPhotoContainer.className = "user-photo";

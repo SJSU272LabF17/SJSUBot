@@ -90,7 +90,7 @@ body {
   margin: 0;
   font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", "Lucida Sans Typewriter", sans-serif;
   font-weight: 300;
-  background: #f7f7f7 url(../images/geometry.png) repeat;
+  background: url(../images/Background.png) repeat;
   background-size: cover;
   color: #333;
 }
@@ -134,7 +134,7 @@ button {
   margin: 4em auto 3em;
   text-align: center;
   color: #fff;
-  background: linear-gradient(180deg, #39C2C9 0%, #3FC8C9 80%, #3FC8C9 100%);
+  background: #1c747c;
   box-shadow: 2px 5px 30px rgba(63, 200, 201, .4);
   will-change: transform, filter;
   transition: all 0.3s ease-out;
@@ -167,6 +167,41 @@ button:focus {
 }
 .fa-github::before {
     content: "\f09b";
+}
+
+.fadeInLeft {
+    -webkit-animation-name: fadeInLeft;
+    animation-name: fadeInLeft;
+}
+
+.article-img {
+    float: left;
+    margin: 61px 0 0;
+    padding: 0;
+    width: calc(100% - 450px);
+}
+
+  .slideanim {visibility:hidden;}
+  .slide {
+      animation-name: slide;
+      -webkit-animation-name: slide;
+      animation-duration: 1s;
+      -webkit-animation-duration: 1s;
+      visibility: visible;
+  }
+
+.box {
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  transform: translate(30%, -50%);
+}
+
+.sayhello {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-90%, -50%);
 }
 
 .chatbox {
@@ -281,11 +316,12 @@ button:focus {
     padding: 25px;
     width: 500px;
     min-width: 390px;
+    height: 100px;
     display: flex;
     flex-flow: row wrap;
     align-items: flex-start;
     margin: 20px auto 0px auto;
-    background: linear-gradient(180deg, #39C2C9 0%, #3FC8C9 80%, #3FC8C9 100%);
+    background: #1c747c;
     border-radius: 10px 10px 0px 0px;
     box-sizing: border-box;
     border: 1px solid #ccc;
@@ -400,6 +436,18 @@ button:focus {
     width: 40px;
     height: 40px;
 }
+
+
+video {
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+
 /*
 @-webkit-keyframes pulse {
   from { opacity: 0; }
