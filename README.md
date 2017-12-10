@@ -29,7 +29,7 @@ A Customized AI  powered  chatbot  is  spawned  inside  the  website  when  pros
 
 Screenshot of the Bot
 
-![image](https://github.com/SJSU272LabF17/Project-Team-3/blob/master/Screenshot%20Bot.png)
+![image](https://github.com/SJSU272LabF17/Project-Team-3/blob/master/Screenshot1.png)
 
 ### Contributors
 
