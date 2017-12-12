@@ -1,5 +1,6 @@
 'use strict';
 const socket = io();
+var response;
 
 const chatLogs = document.querySelector('.chatlogs');
 //const outputBot = document.querySelector('.chatright');
@@ -38,7 +39,7 @@ recognition.addEventListener('result', (e) => {
 
  // outputYou.textContent = text;
   console.log('Confidence: ' + e.results[0][0].confidence);
-
+  response = 0;
   socket.emit('chat message', text);
 });
 
@@ -47,6 +48,7 @@ function send(text) {
     divHuman.className = "chat friend";
     divHuman.innerHTML = `<img src=\'/images/user.png\'><p class=\'chat-message\'>${text}</p>`;
     chatLogs.appendChild(divHuman);
+    response = 1;
   socket.emit('chat message', text);
 }
 
@@ -62,7 +64,8 @@ function synthVoice(text) {
   const synth = window.speechSynthesis;
   const utterance = new SpeechSynthesisUtterance();
   utterance.text = text;
-  synth.speak(utterance);
+  if(response ==0){
+  synth.speak(utterance);}
 }
 
 socket.on('bot reply', function(replyText) {
