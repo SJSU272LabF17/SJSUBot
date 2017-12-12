@@ -22,13 +22,13 @@ router.get('/index', function(req, res){
 
 // Register
 router.get('/register', function(req, res){
-	res.render('register', {layout :'other'});
+	res.render('register');
 });
 
 // Adminlogin
 router.get('/adminlogin', function(req, res){
 	console.log("Getting admin");
-	res.render('adminlogin', {layout :'other'});
+	res.render('adminlogin');
 });
 
 // AdminloginPost
@@ -38,7 +38,7 @@ router.post('/adminlogin', function(req, res){
 	var password = req.body.password;
 	if(username == "admin@sjsu.edu"){
 		console.log("Valid admin credentials");
-			res.render('register', {layout :'other'});
+			res.render('register');
 	}
 
 	else
